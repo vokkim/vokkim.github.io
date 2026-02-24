@@ -643,6 +643,11 @@
     <script>
         let currentDate = new Date();
 
+        if (currentDate.getHours() < 18) {
+            // If before 6 PM, show previous day's games by default
+            currentDate.setDate(currentDate.getDate() - 1)
+        }
+
         function formatDate(date) {
             return date.toISOString().split('T')[0];
         }
@@ -952,14 +957,6 @@
         // Initialize on load
         initDate();
         loadGames();
-
-        // Auto-refresh every 30 seconds for live games
-        setInterval(() => {
-            const liveGames = document.querySelectorAll('.status-live');
-            if (liveGames.length > 0) {
-                loadGames();
-            }
-        }, 30000);
     </script>
 </body>
 </html>
